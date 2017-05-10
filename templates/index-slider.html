@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script language="JavaScript"><!--
+function Drive(left, right) {
+ var iframe = document.getElementById("setDrive");
+ var slider = document.getElementById("speed");
+ left *= speed.value / 100.0; right *= speed.value / 100.0; iframe.src = "/set/" + left + "/" + right;
+}
+
+//--></script>
+
+
+</head>
+<body>
+
+<h1 style="text-align:center;">Raspberry Pi CCTV</h1>
+
+<p style="text-align:center;">Powered by UV4L</p>
+<p style="text-align:center;"><code>https://192.168.0.5:8080/stream/video.mjpeg</code></p>
+<center>
+<iframe id="setDrive" width="100%" height="50" frameborder="0"></iframe>
+<input onchange="myFunction()" id="speed" type="range" min="0" max="100" value="100" style="width:300px" />
+</center>
+<h1 style="text-align:center;color:purple">Speed</h1>
+<h1 id="speedVal" style="text-align:center;">Speed:</h1>
+
+
+<h1 style="text-align:center; color:blue">Pot: {{ p }}</h1>
+<h1 style="text-align:center; color:red">LDR: {{ l }}</h1>
+<h1 style="text-align:center; color:green">PIR state: {{ pir }}</h1>
+
+<center><img src= "https://192.168.0.5:8080/stream/video.mjpeg"></center>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("speed").value;
+     document.getElementById("speedVal").innerHTML = x;
+}
+</script>
+</body>
+</html>
+
+
