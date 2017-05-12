@@ -2,8 +2,10 @@
 <html>
 
 <head>
+     
 <script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery-3.2.1.js') }}"></script>
+
 </head>
 
 <body>
@@ -16,9 +18,13 @@
 <h1 style="text-align:center; color:red">LDR: {{ l }}</h1>
 <h1 style="text-align:center; color:green">PIR state: {{ pir }}</h1>
 
-
+<h3 style="text-align:center; color:blue">Pot value:</h3>
 <h3 style="text-align:center; color:blue" id='pot'>Pot state</h3>
+
+<h3 style="text-align:center; color:red">LDR value</h3>
 <h3 style="text-align:center; color:red" id='ldr'>LDR state</h3>
+
+<h3 style="text-align:center; color:green">PIR state</h3>
 <h3 style="text-align:center; color:green" id='pir'>PIR state</h3>
 
 <center><img src= "https://192.168.0.13:8080/stream/video.mjpeg"></center>
@@ -26,7 +32,7 @@
 <script>
 
   $(document).ready(function(){
-          
+
 	//set up switch server sent event endpoint
 	//this part will receive all incoming json data streams from the Pi
 
@@ -34,6 +40,14 @@
 	incomingData.onmessage = function(e) {
 	var data = $.parseJSON(e.data);
 	console.log(data);
+	
+	
+
+  	$('#pot').text(data.pot_json.toFixed(2))
+	$('#ldr').text(data.ldr_json.toFixed(2))
+	$('#pir').text(data.pir_json)
+
+	
 };
 });
               
