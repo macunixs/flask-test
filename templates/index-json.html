@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     
+<script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
+
+</head>
+
+<body>
+
+<h1 style="text-align:center;">Raspberry Pi CCTV</h1>
+
+<p style="text-align:center;">Powered by UV4L</p>
+
+<h1 style="text-align:center; color:blue">Pot: {{ p }}</h1>
+<h1 style="text-align:center; color:red">LDR: {{ l }}</h1>
+<h1 style="text-align:center; color:green">PIR state: {{ pir }}</h1>
+
+
+<h3 style="text-align:center; color:blue" id='pot'>Pot state</h3>
+<h3 style="text-align:center; color:red" id='ldr'>LDR state</h3>
+<h3 style="text-align:center; color:green" id='pir'>PIR state</h3>
+
+<center><img src= "https://192.168.0.13:8080/stream/video.mjpeg"></center>
+
+<script>
+
+  $(document).ready(function(){          
+                  //set up switch server sent event endpoint 
+                  var thingSource = new EventSource("{{ url_for('stream')}}");
+                  thingSource.onmessage = function(e) {
+                  var data = $.parseJSON(e.data);
+		console.log(data);
+};
+});
+              
+</script>
+
+
+</body>
+</html>
+
+
