@@ -2,12 +2,24 @@
 <html>
 <body>
 
+<h1 style="text-align:center; color:red;">HELLO WORLD</h1>
+<h1 style="text-align:center; color:blue;" >Raspberry Pi Simple Webserver</h1>
+<h2 style="text-align:center; color:lightgreen;">Flask is a microframework for Python</h2>
 
-<h1 style="text-align:center;">HELLO WORLD!</h1>
 
-<h1 style="text-align:center;">Raspberry Pi Simple Webserver</h1>
+<img src="https://www.raspberrypi.org/app/uploads/2012/03/raspberry-pi-logo.png " 
+ alt="raspberrypi.org" height="325" width="275" align="middle">
 
-<p style="text-align:center;">Flask is a microframework for Python </p>
+<center><button onclick="myFunction()"><strong>Click me</strong></button></center>
+
+<p id="demo" style="text-align:center;">Waiting for button press...</p>
+
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Button is pressed!";
+}
+</script>
+
 
 
 </body>
