@@ -2,9 +2,7 @@
 <html>
 
 <head>
-     
 <script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
-
 </head>
 
 <body>
@@ -26,12 +24,15 @@
 
 <script>
 
-  $(document).ready(function(){          
-                  //set up switch server sent event endpoint 
-                  var thingSource = new EventSource("{{ url_for('stream')}}");
-                  thingSource.onmessage = function(e) {
-                  var data = $.parseJSON(e.data);
-		console.log(data);
+  $(document).ready(function(){
+          
+	//set up switch server sent event endpoint
+	//this part will receive all incoming json data streams from the Pi
+
+	var incomingData = new EventSource("{{ url_for('stream')}}");
+	incomingData.onmessage = function(e) {
+	var data = $.parseJSON(e.data);
+	console.log(data);
 };
 });
               
