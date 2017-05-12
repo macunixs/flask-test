@@ -65,20 +65,23 @@ def index():
     global pir_state
     return render_template('index-json.html', p = read_pot , l = read_ldr ,pir = pir_state)
 
+# the following route will send JSON data streams to client browser
+# variables are GLOBAL as we are grabbing those values from other external function/class in background thread
 @app.route('/stream')
 def stream():
     global read_pot
     global read_ldr
     global pir_state
     def read_sensor():
-       while True:
-           stream_state = { 'pot' : read_pot,
-                            'ldr' : read_ldr,
-                            'pir' : pir_state,
-                       }
-           
-           yield 'data:{0}\n\n'.format(json.dumps(stream_state))
-           sleep(1)
+        while True:
+            stream_state = {    'pot_json' : read_pot,
+                                'ldr_json' : read_ldr,
+                                'pir_json' : pir_state,
+                           }
+
+            yield 'data:{0}\n\n'.format(json.dumps(stream_state))
+            sleep(0.5)
+
     return Response(read_sensor(), mimetype='text/event-stream')
     
 if __name__ == "__main__":
@@ -95,4 +98,5 @@ if __name__ == "__main__":
     readPIR.join()
 
     print
+
 
